@@ -25,6 +25,25 @@ namespace Catalog.Persistence.Configurations
 
 
 
+
+            var products = new List<Product>();
+            var random = new Random();
+
+
+            for(var i = 1; i<= 100; i++)
+            {
+                products.Add(new Product
+                {
+                    ProductID = i,
+                    Name = $"Product {i}",
+                    Description = $"Description for product {i}",
+                    Price = random.Next(100, 1000)
+
+                });
+            }
+
+            entityTypeBuilder.HasData(products);
+
         }
     }
 }
