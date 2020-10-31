@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Catalog.Persistence\Catalog.Persistence.csproj" />
+    <ProjectReference Include="..\Catalog.Services.Querys\Catalog.Services.Queries.csproj" />
   </ItemGroup>
 
 

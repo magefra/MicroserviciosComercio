@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Catalog.Persistence;
+using Catalog.Services.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,10 @@ namespace Catalog.Api
                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                        o => o.MigrationsHistoryTable("_EFMigrationsHistory", "Catalog")
                        ));
+
+
+
+            services.AddTransient<IProductQueryService, ProductQueryService>();
 
 
             services.AddControllers();
