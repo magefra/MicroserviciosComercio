@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -14,7 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Catalog.Persistence\Catalog.Persistence.csproj" />
-    <ProjectReference Include="..\Catalog.Services.Querys\Catalog.Services.Queries.csproj" />
+    <ProjectReference Include="..\Catalog.Services\EventHandlers\Catalog.Service.EventHandlers\Catalog.Service.EventHandlers.csproj" />
+    <ProjectReference Include="..\Catalog.Services\Queries\Catalog.Service.Queries\Catalog.Service.Queries.csproj" />
   </ItemGroup>
 
 

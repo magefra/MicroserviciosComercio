@@ -41,7 +41,7 @@ namespace Catalog.Services.Queries
 
     public class ProductQueryService : IProductQueryService
     {
-    
+
         /// <summary>
         /// 
         /// </summary>
@@ -63,7 +63,7 @@ namespace Catalog.Services.Queries
         /// <returns></returns>
         public async Task<DataCollection<ProductDtos>> GetAllAsync(int page,
                                                                    int take,
-                                                                   IEnumerable<int> products = null )
+                                                                   IEnumerable<int> products = null)
         {
             var collection = await _applicationDbContext.Products
                                     .Where(x => products == null || products.Contains(x.ProductID))
