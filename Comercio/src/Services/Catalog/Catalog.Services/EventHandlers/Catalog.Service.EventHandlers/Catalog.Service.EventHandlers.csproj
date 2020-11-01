@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Catalog.Api\Catalog.Common\Catalog.Common.csproj" />
     <ProjectReference Include="..\..\..\Catalog.Persistence\Catalog.Persistence.csproj" />
   </ItemGroup>
 
