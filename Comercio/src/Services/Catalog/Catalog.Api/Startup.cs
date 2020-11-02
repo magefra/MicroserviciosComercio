@@ -3,12 +3,15 @@ using System.Text.Json.Serialization;
 using Catalog.Persistence;
 using Catalog.Services.Queries;
 using Common.Logging;
+using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -32,6 +35,17 @@ namespace Catalog.Api
                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                        o => o.MigrationsHistoryTable("_EFMigrationsHistory", "Catalog")
                        ));
+
+
+            services.AddHealthChecks()
+                .AddCheck("AlwaysHealthy", () => HealthCheckResult.Healthy())
+                .AddDbContextCheck<ApplicationDbContext>()
+                .AddProcessAllocatedMemoryHealthCheck(512); // 512 
+
+
+
+            services.AddHealthChecksUI()
+                    .AddInMemoryStorage();
 
 
 
@@ -69,10 +83,27 @@ namespace Catalog.Api
 
             app.UseAuthorization();
 
+           
+
             app.UseEndpoints(endpoints =>
             {
+            
                 endpoints.MapControllers();
+
+               
+
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapHealthChecksUI();
+
             });
+
+      
+
         }
     }
 }
